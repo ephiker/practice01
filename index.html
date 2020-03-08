@@ -1,24 +1,40 @@
 <html>
 
 <head>
-    <title>HTML - 수업소개</title>
+    <!-- <title></title> -->
+    <h1>to do list</h1>
     <meta charset="utf-8">
+    <style>
+        /* #inputField {} */
+
+        /* #thing {
+            text-align: left;
+        } */
+    </style>
 </head>
 
 <body>
-    <h1>HTML</h1>
-    <ol>
-        <li>기술소개</li>
-        <li>기본문법</li>
-        <li>하이퍼텍스트와 속성</li>
-        <li>리스트와 태그의 중첩</li>
-    </ol>
+    <!-- 인풋필드 -->
+    <input type="text" id="IF_Todo">
 
-    <h2>선행학습</h2>
+    <!-- 버튼 -->
+    <button onclick="Post()"> post</button>
 
-    깃 테스트
-    깃 테스트
-    깃 테스트
+    <!-- 영역구분 -->
+    <br><br><br>
+
+    <!-- 목록 -->
+    <div id="DV_List">
+        <!-- 항목 -->
+        <!-- <div id="DV_Thing">
+            <textarea id="TA_Thing" cols="30" rows="1"></textarea>
+            <button id="BT_Delete" onclick="DeleteThis(id)">DELETE</button>
+        </div> -->
+    </div>
+
+    <!-- using 자바스크립트 -->
+    <script type="text/javascript" src="functions.js"></script>
+
 </body>
 
 </html>
