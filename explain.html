@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+</head>
+<body>
+<div id="root">
+
+</div>
+
+<div id="nouse"></div>
+
+<script>
+
+
+    // TODO
+    // [1]
+    // string(그냥 글자들)과 element를 구분해야합니다.
+
+    //1 innerHtml 동작방식
+    // element객체의 innerHTML = 문자열(단순글자)
+    // 그러면 단순한 글자들이 element가 된다.
+    // 사용상 불편한 부분 : root(div)에 이미 자식들이 있다면, innerHTML을 쓸순없음
+    const list = document.getElementById('nouse');
+    list.innerHTML = listItemTmpl("방청소");
+
+    //2 createElement 동작방식
+    // element객체를 자바스크립트 코드 안에서 동적으로 만들어줌
+    // 브라우저가 html을 로딩하면 자연스럽게 element를 만들게 되는데, 자바스크립트 안에서 element를 직접 만들려면 이 함수를 사용
+    // 특히 appendChild를 하려면, createElement를 사용해야함 (innerHTML을 할때는 필요없음)
+
+    var ip_thing = document.createElement("input");
+
+    //3 appendChild 동작방식
+    // element객체에 자식들이 있으면 그 자식들 뒤로 또 다른 element를 붙임
+    // element객체의 appendChild ( 또 다른 element)
+    // 필수사항 : 그러면 그냥 글자들이 아니라, 글자들을 element화 시켜서 appendChild를 해야함
+
+    var bt_thing = document.createElement("BUTTON"); //동적으로 element를 만듦
+    bt_thing.innerHTML = ip_thing.value; // 그 안에다가 필요한 문자열들을 넣음
+    parent.appendChild(bt_thing); //parent, bt_thing 모두 element임
+
+    // 요 함수(api)들이 무조건 이것만 쓴다가 아니고, 필요할때에 따라 각자 조합해서 사용하면 됩니다.
+
+
+
+    // TODO
+    // [2]
+    // 어제 보여준 코드
+
+    function listItemTmpl(data) {
+        return `
+            <div id="listItem">
+                   <div>
+                        <div> ${data} </div>
+                        <button onclick="itemRemove()">삭제</button>
+                  </div>
+              </div>
+        `
+    }
+
+    // 자바스크립트 템플릿 리터럴 (새로운 문자열 표현방식)
+
+    function itemRemove() {
+        console.log("삭제");
+    }
+
+    const root = document.getElementById('root');
+    root.innerHTML = listItemTmpl("방청소");
+
+    //그러면 onclick 핸들러(리스너)를 어떻게 넣어주어야할까??
+
+    //방법 2가지
+    //1. cleanTheRoom 함수를 미리 위처럼 정의해놓고, listItemTmpl안에 onclick을 위처럼 등록해 놓는다.
+    //2. button element를 가져와서 addEventListener 함수를 사용한다. (사용법은 찾아보세요)
+    // => 2개 방법 중 하나를 선택해서 구현하면 됩니다.
+
+</script>
+</body>
+</html>
