@@ -1,20 +1,45 @@
 var index = 0;
+// index++;
+var itemArr = new Array();
 
-function Post() {
-    index++;
-    var root = document.getElementById("DV_List");
-    var txt_input = document.getElementById("IF_Todo").value;
-
-    var item = `
-    <div id="DV_Thing,${index}">
-    <button id="BT_Thing,${index}" class="textField" onclick="Edit(id)">${txt_input}</button>
-    <button id="BT_Delete,${index}" onclick="DeleteThis(id)">DELETE</button>
+var TP_Post = function (param, idx) {
+    return `
+    <div id="DV_Thing">
+    <button id="BT_Thing" class="textField" onclick="Edit(id)">${param}</button>
+    <button id="BT_Delete,${idx}" onclick="DeleteThis(id)">DELETE</button>
     </div>
     `
-    
-    root.innerHTML = root.innerHTML + item;
-    document.getElementById("IF_Todo").value = "";
 }
+function Rearrange() {
+    var literal = "";
+
+    for (var i = 0; i < itemArr.length; i++) {
+        literal += TP_Post(itemArr[i], i);
+    }
+
+    document.getElementById("DV_List").innerHTML = literal;
+    console.log(itemArr);
+}
+
+
+function Post() {
+    itemArr.push(document.getElementById("IF_Todo").value);
+    document.getElementById("IF_Todo").value = "";
+    Rearrange();
+}
+
+
+function DeleteThis(buttonId) {
+    var parent = document.getElementById(buttonId).parentElement;
+
+    for (var i = 0; i < itemArr.length; i++) {
+        if (itemArr[i] == parent.firstElementChild.innerText) {
+            itemArr.splice(i, 1);
+        }
+    }
+    Rearrange();
+}
+
 
 function Edit(elementId) {
     var index_this = elementId.split(',')[1];
@@ -48,7 +73,3 @@ function Update(elementId) {
     parent.innerHTML = item;
 }
 
-function DeleteThis(elementId) {
-    var parent = document.getElementById(elementId).parentElement;
-    parent.remove();
-}
